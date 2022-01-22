@@ -82,6 +82,19 @@ const sun = new THREE.Mesh(
 
 scene.add(sun);
 
+const mercuryTexture = new THREE.TextureLoader().load('images/mercury.jpg');
+
+const mercury = new THREE.Mesh(
+    new THREE.SphereGeometry(1.3, 32, 32),
+    new THREE.MeshPhongMaterial( {
+        map: mercuryTexture,
+    })
+);
+mercury.position.setX(10);
+mercury.position.setZ(8);
+scene.add(mercury);
+
+
 const venusTexture = new THREE.TextureLoader().load('images/venus.jpg');
 
 const venus = new THREE.Mesh(
@@ -106,6 +119,8 @@ function animate() {
     clouds.rotation.y -= .00025;
 
     venus.rotation.y += 0.0003;
+
+    mercury.rotation.y += 0.0006;
 
     theta += dTheta;
     moon.position.x = r * Math.cos(theta) - 10;
@@ -133,7 +148,8 @@ function moveCamera() {
 
     const t = document.body.getBoundingClientRect().top;
     earth.rotation.y += 0.05;
-    venus.rotation.y += 0.01;
+    venus.rotation.y += 0.02;
+    mercury.rotation.y += 0.03;
 
     camera.position.z = t * -0.01;
     camera.position.x = t * -0.0008;
